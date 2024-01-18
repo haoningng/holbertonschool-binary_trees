@@ -16,6 +16,8 @@ const binary_tree_t *second)
 	if (first == NULL || second == NULL || first->parent == NULL
 			|| second->parent == NULL)
 		return (NULL);
+	if (first->parent == second->parent)
+		return ((binary_tree_t *)first);
 	while (first != NULL)
 	{
 		if (is_children(first, second))
@@ -40,7 +42,7 @@ bool is_children(const binary_tree_t *ancestor, const binary_tree_t *target)
 
 	cur = target;
 	if (target->parent == ancestor)
-		return true;
+		return (true);
 	while (cur != NULL)
 	{
 		if (cur->parent == ancestor)
