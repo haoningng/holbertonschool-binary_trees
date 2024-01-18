@@ -13,17 +13,16 @@ bool is_children(const binary_tree_t *ancestor, const binary_tree_t *target);
 binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 const binary_tree_t *second)
 {
-	if (first == NULL || second == NULL || first->parent == NULL
-			|| second->parent == NULL)
+	if (first == NULL || second == NULL)
 		return (NULL);
-	if (first->parent == second->parent)
+	if (first == second)
 		return ((binary_tree_t *)first);
 	while (first != NULL)
 	{
 		if (is_children(first, second))
-		{
 			return ((binary_tree_t *)first);
-		}
+		else if (is_children(second, first))
+			return ((binary_tree_t *)second);
 		first = first->parent;
 	}
 	return (NULL);
@@ -41,8 +40,6 @@ bool is_children(const binary_tree_t *ancestor, const binary_tree_t *target)
 	const binary_tree_t *cur;
 
 	cur = target;
-	if (target->parent == ancestor)
-		return (true);
 	while (cur != NULL)
 	{
 		if (cur->parent == ancestor)
